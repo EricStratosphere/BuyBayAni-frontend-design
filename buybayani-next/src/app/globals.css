@@ -40,9 +40,17 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 .hero-banner{position:relative;width:100vw;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;padding:0 0 1rem 0;box-sizing:content-box}
 .hero-banner .banner-image{width:100vw;height:260px;background:linear-gradient(180deg,#dff6f0,#eef9f6);display:block;background-size:cover;background-position:center;position:relative}
 .hero-banner .banner-image .banner-img{object-fit:cover}
-.hero-banner .banner-copy{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#052a26;max-width:760px;text-align:center;padding:0 1rem}
-.hero-banner .banner-copy h1{margin:0;font-size:1.5rem}
-.hero-banner .banner-copy p{margin:0.5rem 0;color:var(--muted)}
+.hero-banner .banner-image{width:100vw;height:260px;background:linear-gradient(180deg,#dff6f0,#eef9f6);display:block;background-size:cover;background-position:center;position:relative;overflow:hidden}
+
+/* dark overlay to improve text contrast */
+.hero-banner .banner-image::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.45);mix-blend-mode:normal}
+
+.hero-banner .banner-copy{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--card-bg);max-width:760px;text-align:center;padding:0 1rem}
+.hero-banner .banner-copy h1{margin:0;font-size:1.5rem;font-weight:800;text-shadow:0 6px 18px rgba(0,0,0,0.45)}
+.hero-banner .banner-copy p{margin:0.5rem 0;color:rgba(255,255,255,0.9);text-shadow:0 4px 12px rgba(0,0,0,0.35)}
+
+/* ensure Next/Image fill uses object-fit:cover */
+.banner-img{object-fit:cover}
 
 @media(min-width:760px){
   .hero-banner .banner-image{height:380px}
@@ -222,7 +230,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 /* Products grid */
 .products-grid{display:grid;grid-template-columns:1fr;gap:1rem}
 .product-card{background:var(--card-bg);border-radius:10px;box-shadow:0 6px 18px rgba(12,20,25,0.08);overflow:hidden;display:flex;flex-direction:column}
-.product-image{height:180px;background:#eef2f3;display:flex;align-items:center;justify-content:center}
+.product-image{height:180px;background:#eef2f3;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 48px rgba(0,0,0,0.18)}
 .product-image img{width:100%;height:100%;object-fit:cover}
 .product-body{padding:0.75rem}
 .product-title{font-size:1rem;margin:0 0 0.25rem}
@@ -326,8 +334,8 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
 .product-page{padding:2rem 1rem}
 .product-detail{display:flex;flex-direction:column;gap:1rem;background:#f3f5f6;border-radius:12px;padding:1rem;box-shadow:0 18px 50px rgba(12,20,25,0.06)}
 .product-media{flex:1}
-.media-placeholder{width:100%;max-width:640px;height:360px;background:#ddd;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.media-img{width:100%;height:100%;object-fit:cover;background:#cfcfcf;display:flex;align-items:center;justify-content:center;color:#666}
+.media-placeholder{width:100%;max-width:640px;height:360px;background:#ddd;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+.detail-image{object-fit:cover}
 .product-info{flex:1;display:flex;flex-direction:column;gap:0.75rem;padding:0.25rem}
 .product-name{margin:0;font-size:1.5rem}
 .product-meta{display:flex;flex-direction:column;gap:0.5rem}
@@ -345,11 +353,46 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
   .product-info{padding-left:1rem}
 }
 
+/* Horizontal scroller styles */
+.horizontal-section{margin-top:1.25rem}
+.section-title{margin:0 0 0.5rem 0;font-size:1.125rem}
+.scroller{display:flex;gap:1rem;overflow-x:auto;padding-bottom:0.5rem;padding-left:0.25rem}
+.scroller::-webkit-scrollbar{height:8px}
+.scroller::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:999px}
+.small-card{min-width:160px;background:white;border-radius:10px;padding:0.5rem;box-shadow:0 12px 36px rgba(12,20,25,0.08);display:flex;flex-direction:column;gap:0.5rem}
+.small-media{height:96px;border-radius:8px;overflow:hidden;background:#efefef;display:flex;align-items:center;justify-content:center}
+.small-placeholder{width:100%;height:100%;background:#e9ecec;display:flex;align-items:center;justify-content:center;color:#7b7b7b}
+.small-info{padding:0 0.25rem}
+.small-title{font-weight:700;font-size:0.95rem}
+.small-price{color:var(--muted);font-size:0.85rem}
+
+@media(min-width:760px){
+  .small-card{min-width:200px}
+  .small-media{height:110px}
+}
+
+/* Horizontal scroller styles */
+.horizontal-section{margin-top:1.5rem}
+.section-title{margin:0 0 0.5rem;padding-left:0.25rem;font-size:1.05rem}
+.scroller{display:flex;gap:0.75rem;overflow-x:auto;padding-bottom:0.5rem;padding-left:0.25rem}
+.scroller::-webkit-scrollbar{height:8px}
+.scroller::-webkit-scrollbar-thumb{background:rgba(12,20,25,0.12);border-radius:8px}
+.small-card{min-width:160px;background:white;border-radius:10px;padding:0.5rem;box-shadow:0 10px 30px rgba(12,20,25,0.08);display:flex;flex-direction:column;gap:0.5rem}
+.small-media{height:96px;border-radius:8px;overflow:hidden;background:#efefef;display:flex;align-items:center;justify-content:center}
+.small-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#7a7a7a}
+.small-info{display:flex;flex-direction:column;gap:0.25rem}
+.small-title{font-weight:700}
+.small-price{color:var(--muted);font-size:0.95rem}
+
+@media(min-width:760px){
+  .small-card{min-width:180px}
+}
+
 /* Product detail page styles */
 .product-page{padding:1.25rem 0}
 .product-detail{display:flex;flex-direction:column;gap:1rem}
 .product-media{flex:1}
-.media-placeholder{width:100%;max-width:720px;height:420px;background:#eef2f3;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(0,0,0,0.18)}
+.media-placeholder{width:100%;max-width:720px;height:420px;background:#eef2f3;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 30px 90px rgba(0,0,0,0.28)}
 .media-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted)}
 
 .product-info{flex:1;padding:0.5rem}
