@@ -13,25 +13,25 @@ const SAMPLE_PRODUCTS: Product[] = [
   {
     title: "Potato (Fresh)",
     price: "₱85 / kg",
-    image: "/file.svg",
+    image: "/potatoes.jpg",
     certificates: ["BAFPS Certified"],
   },
   {
     title: "Tomato (Red)",
     price: "₱120 / kg",
-    image: "/file.svg",
+    image: "/tomatoes.jpg",
     certificates: ["Certified Organic Farm"],
   },
   {
     title: "Sweet Corn",
     price: "₱60 / ear",
-    image: "/file.svg",
+    image: "/sweetcorn.jpg",
     certificates: ["BPI Seed Grower", "Certified Organic Farm"],
   },
   {
     title: "Eggplant",
     price: "₱70 / kg",
-    image: "/file.svg",
+    image: "/eggplant.jpg",
     certificates: [],
   },
 ];

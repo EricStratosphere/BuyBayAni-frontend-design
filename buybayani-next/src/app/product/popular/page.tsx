@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export default function PopularProductPage() {
   return (
@@ -6,8 +7,7 @@ export default function PopularProductPage() {
       <div className="product-detail">
         <div className="product-media">
           <div className="media-placeholder">
-            {/* Replace this div with an Image component later. The box is fixed to avoid overflow. */}
-            <div className="media-img">Photo placeholder</div>
+            <Image src="/potatoes.jpg" alt="Potato" fill className="detail-image" priority />
           </div>
         </div>
 
@@ -39,6 +39,57 @@ export default function PopularProductPage() {
           </div>
         </div>
       </div>
+
+      {/* Horizontal scrollers */}
+      <section className="horizontal-section">
+        <h3 className="section-title">From the same Farm</h3>
+        <div className="scroller" aria-label="Other products from this farm">
+          {[
+            { name: "Baby Potatoes", price: "₱90 / kg" },
+            { name: "Sweet Potatoes", price: "₱75 / kg" },
+            { name: "Red Potatoes", price: "₱88 / kg" },
+            { name: "Potato Chips (Raw)", price: "₱150 / pack" },
+            { name: "Seed Potatoes", price: "₱120 / kg" },
+            { name: "Organic Potatoes", price: "₱140 / kg" },
+          ].map((p, i) => (
+            <article key={i} className="small-card">
+              <div className="small-media">
+                <div className="small-placeholder">Image</div>
+              </div>
+              <div className="small-info">
+                <div className="small-title">{p.name}</div>
+                <div className="small-price">{p.price}</div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="horizontal-section">
+        <h3 className="section-title">Produces you may like</h3>
+        <div className="scroller" aria-label="Recommended products">
+          {[
+            { name: "Tomato (Red)", price: "₱120 / kg" },
+            { name: "Eggplant", price: "₱70 / kg" },
+            { name: "Sweet Corn", price: "₱60 / ear" },
+            { name: "Cabbage", price: "₱55 / head" },
+            { name: "Carrots", price: "₱80 / kg" },
+            { name: "Green Beans", price: "₱95 / kg" },
+            { name: "Onions", price: "₱65 / kg" },
+            { name: "Garlic", price: "₱220 / kg" },
+          ].map((p, i) => (
+            <article key={i} className="small-card">
+              <div className="small-media">
+                <div className="small-placeholder">Image</div>
+              </div>
+              <div className="small-info">
+                <div className="small-title">{p.name}</div>
+                <div className="small-price">{p.price}</div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
