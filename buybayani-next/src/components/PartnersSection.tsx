@@ -18,7 +18,7 @@ const PARTNER_FARMERS: Farmer[] = [
     name: "Juan Dela Cruz",
     farmName: "Mountainview Organic Farm",
     image: "/farmer-juan.svg",
-    certifications: ["Certified Organic Farm", "Rainforest Alliance"],
+    certifications: ["Certified Organic Farm", "BPI Seed Grower"],
     produce: ["Sweet Corn", "Lettuce", "Carrots", "Green Beans"],
     quote: "Farming isn't just our livelihood—it's our way of nourishing our community with the freshest produce.",
     email: "juan@mountainviewfarm.ph",
