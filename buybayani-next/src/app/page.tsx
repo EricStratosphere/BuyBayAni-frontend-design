@@ -38,16 +38,20 @@ const SAMPLE_PRODUCTS: Product[] = [
 
 export default function Home() {
   return (
-    <section id="produce" className="front-page">
-      <div className="hero-banner">
-        <div className="banner-image">
-          <Image src="/sunset-field.png" alt="Sunset field" fill priority className="banner-img" />
+    <div className="front-page">
+      <section id="hero" className="hero-section">
+        <div className="hero-banner">
+          <div className="banner-image">
+            <Image src="/sunset-field.png" alt="Sunset field" fill priority className="banner-img" />
+          </div>
+          <div className="banner-copy">
+            <h1>Fresh from the farm to your table</h1>
+            <p className="lead">Buy directly from Filipino farms. Filter by certifications and freshness.</p>
+          </div>
         </div>
-        <div className="banner-copy">
-          <h1>Fresh from the farm to your table</h1>
-          <p className="lead">Buy directly from Filipino farms. Filter by certifications and freshness.</p>
-        </div>
-      </div>
+      </section>
+
+      <section id="produce" className="products-section">
 
       {/* Featured area - larger card separated from grid to create hierarchy */}
       <div className="featured-area">
@@ -88,6 +92,17 @@ export default function Home() {
           />
         ))}
       </div>
-    </section>
+
+      {/* Call to action for farmers page */}
+      <div className="farmers-cta">
+        <h3>Meet Our Partner Farmers</h3>
+        <p>Discover the dedicated Filipino farmers behind your fresh produce</p>
+        <Link href="/farmers" className="btn-primary">
+          View All Farmers
+        </Link>
+      </div>
+
+      </section>
+    </div>
   );
 }

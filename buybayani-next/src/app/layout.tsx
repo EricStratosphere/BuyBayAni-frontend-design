@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -41,8 +42,9 @@ export default function RootLayout({
             <nav className="main-nav" aria-label="Main navigation">
               <button className="nav-toggle" aria-expanded="false">☰</button>
               <ul className="nav-list">
-                <li><a href="#">Home</a></li>
+                <li><Link href="/">Home</Link></li>
                 <li><a href="#produce">Produce</a></li>
+                <li><Link href="/farmers">Farmers</Link></li>
                 <li><a href="#about">About</a></li>
               </ul>
             </nav>
