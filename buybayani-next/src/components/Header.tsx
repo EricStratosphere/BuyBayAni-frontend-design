@@ -78,6 +78,7 @@ export default function Header() {
               <li><Link href="/">Home</Link></li>
               <li><a href="#produce">Produce</a></li>
               <li><Link href="/farmers">Farmers</Link></li>
+              <li><Link href="/orders">Orders</Link></li>
               <li><a href="#about">About</a></li>
             </ul>
           </nav>
@@ -118,6 +119,7 @@ export default function Header() {
             <li><Link href="/" onClick={closeSidebar}>Home</Link></li>
             <li><a href="#produce" onClick={closeSidebar}>Produce</a></li>
             <li><Link href="/farmers" onClick={closeSidebar}>Farmers</Link></li>
+            <li><Link href="/orders" onClick={closeSidebar}>Orders</Link></li>
             <li><a href="#about" onClick={closeSidebar}>About</a></li>
           </ul>
         </nav>

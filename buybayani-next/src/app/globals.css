@@ -369,6 +369,96 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',
   .media-placeholder{height:520px}
 }
 
+/* Order Tracking Page Styles */
+.order-tracking-page{padding:2rem 0}
+.page-header{text-align:center;margin-bottom:3rem;max-width:800px;margin-left:auto;margin-right:auto}
+.page-header h1{margin:0 0 1rem;font-size:2.5rem;color:#0f172a;font-weight:700}
+.page-subtitle{color:var(--muted);margin:0;font-size:1.1rem;line-height:1.6}
+
+/* Delivery Countdown */
+.delivery-countdown{background:linear-gradient(135deg,#f0fdfa,#ecfdf5);border-radius:12px;padding:2rem;margin-bottom:3rem;border:1px solid rgba(42,157,143,0.1)}
+.countdown-header{text-align:center;margin-bottom:2rem}
+.countdown-header h2{margin:0 0 1rem;font-size:1.75rem;color:#0f172a}
+.delivery-date{margin:0;font-size:1.1rem;color:var(--accent);font-weight:600}
+
+.countdown-active{text-align:center}
+.countdown-label{margin:0 0 1rem;font-size:1.1rem;color:var(--muted)}
+.countdown-timer{display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem}
+.time-unit{display:flex;flex-direction:column;align-items:center;background:white;padding:1rem;border-radius:8px;min-width:80px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.time-number{font-size:2rem;font-weight:700;color:var(--accent);line-height:1}
+.time-label{font-size:0.8rem;color:var(--muted);margin-top:0.25rem;text-transform:uppercase;font-weight:600}
+.countdown-message{margin:0;color:var(--muted);font-size:0.95rem}
+
+.countdown-closed{text-align:center}
+.closed-message{margin:0 0 1rem;font-size:1.1rem;color:#dc2626;font-weight:600}
+.next-opening{margin:0;color:var(--muted)}
+
+/* Orders Section */
+.orders-section{margin-bottom:2rem}
+.orders-section h2{margin:0 0 2rem;font-size:2rem;color:#0f172a}
+.orders-list{display:flex;flex-direction:column;gap:1.5rem}
+
+/* Order Card */
+.order-card{background:white;border-radius:12px;box-shadow:0 8px 25px rgba(12,20,25,0.08);overflow:hidden}
+.order-header{display:flex;justify-content:space-between;align-items:flex-start;padding:1.5rem 1.5rem 1rem;border-bottom:1px solid #f1f5f9}
+.order-id h3{margin:0 0 0.25rem;font-size:1.25rem;color:#0f172a}
+.order-date{color:var(--muted);font-size:0.9rem}
+.status-badge{padding:0.35rem 0.75rem;border-radius:999px;color:white;font-size:0.75rem;font-weight:700;text-transform:uppercase}
+
+/* Order Progress */
+.order-progress{padding:1rem 1.5rem;background:#f8fafc}
+.progress-steps{display:flex;justify-content:space-between;align-items:center;position:relative}
+.progress-steps::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:#e5e7eb;z-index:1}
+.step{display:flex;flex-direction:column;align-items:center;position:relative;z-index:2}
+.step-icon{width:40px;height:40px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:0.5rem;transition:all 0.3s ease}
+.step span{font-size:0.75rem;color:var(--muted);font-weight:600;text-align:center}
+.step.completed .step-icon{background:var(--accent);color:white}
+.step.completed span{color:var(--accent)}
+
+/* Order Details */
+.order-details{padding:1.5rem}
+.order-info{margin-bottom:1.5rem}
+.order-info p{margin:0 0 0.5rem;color:#0f172a}
+.status-message{font-style:italic;color:var(--accent);font-weight:600;margin-bottom:1rem!important}
+
+.order-items h4{margin:0 0 1rem;color:#0f172a;font-size:1.1rem}
+.items-list{list-style:none;margin:0 0 1rem;padding:0;border:1px solid #f1f5f9;border-radius:8px}
+.item{display:grid;grid-template-columns:1fr auto auto;gap:1rem;padding:0.75rem 1rem;border-bottom:1px solid #f1f5f9;align-items:center}
+.item:last-child{border-bottom:none}
+.item-name{color:#0f172a;font-weight:600}
+.item-quantity{color:var(--muted);font-size:0.9rem}
+.item-price{color:var(--accent);font-weight:700;text-align:right}
+.order-total{text-align:right;padding:1rem;background:#f8fafc;border-radius:8px;color:#0f172a;font-size:1.1rem}
+
+/* No Orders State */
+.no-orders{text-align:center;padding:3rem 2rem;background:#f8fafc;border-radius:12px}
+.no-orders p{margin:0 0 1.5rem;color:var(--muted);font-size:1.1rem}
+.no-orders .btn-primary{display:inline-block;text-decoration:none;padding:0.75rem 1.5rem;font-size:1rem}
+
+/* Mobile Responsive */
+@media(max-width:768px){
+  .order-tracking-page{padding:1rem 0}
+  .page-header{margin-bottom:2rem}
+  .page-header h1{font-size:2rem}
+  .page-subtitle{font-size:1rem}
+  
+  .delivery-countdown{padding:1.5rem}
+  .countdown-header h2{font-size:1.5rem}
+  .countdown-timer{gap:0.5rem}
+  .time-unit{min-width:60px;padding:0.75rem 0.5rem}
+  .time-number{font-size:1.5rem}
+  .time-label{font-size:0.7rem}
+  
+  .order-header{flex-direction:column;align-items:flex-start;gap:1rem}
+  .progress-steps{flex-wrap:wrap;gap:0.5rem}
+  .step{flex:1;min-width:0}
+  .step span{font-size:0.65rem}
+  .step-icon{width:32px;height:32px;font-size:0.8rem}
+  
+  .item{grid-template-columns:1fr;gap:0.25rem;text-align:left}
+  .item-quantity,.item-price{justify-self:start}
+}
+
 /* Partner Farmers Section */
 .partners-section{margin:3rem 0 2rem;padding:2rem 0}
 .partners-header{text-align:center;margin-bottom:2rem}
