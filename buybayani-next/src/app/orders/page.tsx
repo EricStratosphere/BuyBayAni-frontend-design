@@ -2,33 +2,51 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { getDeliveryStatusMessage, formatDeliveryDate } from '../../utils/delivery';
 
 // Mock order data - in a real app, this would come from an API
 const MOCK_ORDERS: Order[] = [
   {
     id: 'ORD-2025-001',
     status: 'preparing' as OrderStatus,
-    orderDate: '2025-10-08',
-    deliveryDate: '2025-10-12',
+    orderDate: '2025-10-27',
+    deliveryDate: '2025-10-27',
+    deliveryType: 'same-day',
     items: [
       { name: 'Potato (Fresh)', quantity: 2, unit: 'kg', price: 170 },
       { name: 'Tomato (Red)', quantity: 1, unit: 'kg', price: 120 },
     ],
-    total: 290,
+    total: 440, // Including ₱150 same-day fee
     farmer: 'Santos Family Farm',
-    deliveryAddress: '123 Main St, Quezon City, Metro Manila'
+    deliveryAddress: '123 Main St, Quezon City, Metro Manila',
+    deliveryWindow: '4 PM - 8 PM'
   },
   {
     id: 'ORD-2025-002',
     status: 'delivered' as OrderStatus,
     orderDate: '2025-10-01',
     deliveryDate: '2025-10-05',
+    deliveryType: 'standard',
     items: [
       { name: 'Sweet Corn', quantity: 6, unit: 'ears', price: 360 },
     ],
-    total: 360,
+    total: 410, // Including standard delivery
     farmer: 'Mountainview Organic Farm',
     deliveryAddress: '123 Main St, Quezon City, Metro Manila'
+  },
+  {
+    id: 'ORD-2025-003',
+    status: 'out_for_delivery' as OrderStatus,
+    orderDate: '2025-10-26',
+    deliveryDate: '2025-10-26',
+    deliveryType: 'same-day',
+    items: [
+      { name: 'Eggplant', quantity: 3, unit: 'kg', price: 210 },
+    ],
+    total: 210, // Free same-day delivery for orders over ₱1000 (example)
+    farmer: 'Sunrise Vegetable Garden',
+    deliveryAddress: '123 Main St, Quezon City, Metro Manila',
+    deliveryWindow: '4 PM - 8 PM'
   }
 ];
 
@@ -46,6 +64,8 @@ interface Order {
   status: OrderStatus;
   orderDate: string;
   deliveryDate: string;
+  deliveryType: 'standard' | 'same-day';
+  deliveryWindow?: string;
   items: OrderItem[];
   total: number;
   farmer: string;
@@ -243,9 +263,32 @@ function OrderCard({ order }: { order: Order }) {
       <div className="order-details">
         <div className="order-info">
           <p className="status-message">{STATUS_MESSAGES[order.status]}</p>
+          
+          {order.deliveryType === 'same-day' && (
+            <div className="same-day-delivery-info">
+              <span className="same-day-badge">⚡ Same-Day Delivery</span>
+              {order.deliveryWindow && (
+                <span className="delivery-window">{order.deliveryWindow}</span>
+              )}
+            </div>
+          )}
+          
           <p className="delivery-info">
-            <strong>Delivery Date:</strong> {new Date(order.deliveryDate).toLocaleDateString('en-PH')}
+            <strong>
+              {order.deliveryType === 'same-day' ? 'Delivery Today:' : 'Delivery Date:'}
+            </strong> 
+            {formatDeliveryDate(new Date(order.deliveryDate))}
+            {order.deliveryWindow && order.deliveryType === 'same-day' && 
+              ` (${order.deliveryWindow})`
+            }
           </p>
+          
+          {order.deliveryType === 'same-day' && order.status !== 'delivered' && (
+            <p className="same-day-status">
+              {getDeliveryStatusMessage(order.deliveryType, new Date(order.orderDate), new Date(order.deliveryDate))}
+            </p>
+          )}
+          
           <p className="farmer-info">
             <strong>From:</strong> {order.farmer}
           </p>

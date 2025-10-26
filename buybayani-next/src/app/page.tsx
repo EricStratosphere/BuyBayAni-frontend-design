@@ -1,6 +1,7 @@
 import ProductCard from "../components/ProductCard";
 import Link from "next/link";
 import Image from "next/image";
+import { isSameDayDeliveryAvailable, getSameDayDeliveryETA } from "../utils/delivery";
 
 type Product = {
   title: string;
@@ -37,6 +38,9 @@ const SAMPLE_PRODUCTS: Product[] = [
 ];
 
 export default function Home() {
+  const sameDayAvailable = isSameDayDeliveryAvailable();
+  const deliveryETA = sameDayAvailable ? getSameDayDeliveryETA() : null;
+
   return (
     <div className="front-page">
       <section id="hero" className="hero-section">
@@ -47,6 +51,12 @@ export default function Home() {
           <div className="banner-copy">
             <h1>Fresh from the farm to your table</h1>
             <p className="lead">Buy directly from Filipino farms. Filter by certifications and freshness.</p>
+            {sameDayAvailable && (
+              <div className="same-day-hero-alert">
+                <span className="alert-icon">⚡</span>
+                <span className="alert-text">Same-day delivery available today! Order by 2 PM for delivery {deliveryETA}</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
