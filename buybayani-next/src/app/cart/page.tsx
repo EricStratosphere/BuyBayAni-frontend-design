@@ -3,6 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { 
+  getDeliveryOptions, 
+  calculateSameDayFee, 
+  formatDeliveryDate
+} from '../../utils/delivery';
 
 interface CartItem {
   id: string;
@@ -166,8 +171,19 @@ function CartSummary({
   selectedItems: CartItem[];
   onCheckout: () => void;
 }) {
+  const [selectedDelivery, setSelectedDelivery] = useState<'standard' | 'same-day'>('standard');
+  
   const subtotal = selectedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const deliveryFee = selectedItems.length > 0 ? 50 : 0; // Fixed delivery fee
+  const deliveryOptions = getDeliveryOptions();
+  const sameDayOption = deliveryOptions.find(opt => opt.type === 'same-day');
+  const standardOption = deliveryOptions.find(opt => opt.type === 'standard');
+  
+  // Calculate delivery fee based on selection
+  let deliveryFee = 50; // Standard delivery fee
+  if (selectedDelivery === 'same-day' && sameDayOption) {
+    deliveryFee = calculateSameDayFee(subtotal);
+  }
+  
   const total = subtotal + deliveryFee;
 
   return (
@@ -177,6 +193,70 @@ function CartSummary({
       <div className="summary-row">
         <span>Subtotal ({selectedItems.length} items)</span>
         <span>₱{subtotal}</span>
+      </div>
+      
+      {/* Delivery Options */}
+      <div className="delivery-options">
+        <h4>Delivery Options</h4>
+        
+        {/* Standard Delivery */}
+        <label className="delivery-option">
+          <input
+            type="radio"
+            name="delivery"
+            value="standard"
+            checked={selectedDelivery === 'standard'}
+            onChange={(e) => setSelectedDelivery(e.target.value as 'standard' | 'same-day')}
+          />
+          <div className="delivery-option-content">
+            <div className="delivery-option-header">
+              <span className="delivery-type">Standard Delivery</span>
+              <span className="delivery-fee">₱50</span>
+            </div>
+            <div className="delivery-details">
+              {standardOption && (
+                <span>📅 {formatDeliveryDate(standardOption.deliveryDate)}</span>
+              )}
+            </div>
+          </div>
+        </label>
+
+        {/* Same-Day Delivery (if available) */}
+        {sameDayOption && sameDayOption.available && (
+          <label className="delivery-option same-day">
+            <input
+              type="radio"
+              name="delivery"
+              value="same-day"
+              checked={selectedDelivery === 'same-day'}
+              onChange={(e) => setSelectedDelivery(e.target.value as 'standard' | 'same-day')}
+            />
+            <div className="delivery-option-content">
+              <div className="delivery-option-header">
+                <span className="delivery-type">
+                  Same-Day Delivery
+                  <span className="same-day-badge-small">⚡ Express</span>
+                </span>
+                <span className="delivery-fee">
+                  {calculateSameDayFee(subtotal) === 0 ? 'FREE' : `₱${calculateSameDayFee(subtotal)}`}
+                </span>
+              </div>
+              <div className="delivery-details">
+                <span>📅 Today {sameDayOption.deliveryWindow}</span>
+                {calculateSameDayFee(subtotal) === 0 && subtotal >= 1000 && (
+                  <span className="free-delivery-note">Free for orders ₱1000+</span>
+                )}
+              </div>
+            </div>
+          </label>
+        )}
+        
+        {!sameDayOption?.available && (
+          <div className="same-day-unavailable">
+            <span className="unavailable-text">⏰ Same-day delivery unavailable</span>
+            <small>Available weekends before 2 PM</small>
+          </div>
+        )}
       </div>
       
       <div className="summary-row">
@@ -189,11 +269,6 @@ function CartSummary({
       <div className="summary-row total-row">
         <span>Total</span>
         <span>₱{total}</span>
-      </div>
-
-      <div className="delivery-info">
-        <p>📅 Next delivery: Saturday, Oct 12</p>
-        <p>⏰ Order by Thursday 11:59 PM</p>
       </div>
 
       <button 
