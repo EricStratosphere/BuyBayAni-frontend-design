@@ -1,3 +1,5 @@
+"use client"
+
 import { getDeliveryOptions, isSameDayDeliveryAvailable, calculateSameDayFee } from '../../utils/delivery';
 
 export default function DeliveryTestPage() {
